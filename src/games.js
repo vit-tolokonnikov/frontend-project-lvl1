@@ -32,6 +32,34 @@ const getCalcExpretion = (name) => {
         return false;
     }
 }
+const calculateGCD = (num1, num2) => {
+    while(num2) {
+        var t = num2;
+        num2 = num1 % num2;
+        num1 = t;
+    }
+    return num1;
+};
+
+const getGcdExpretion = (name) => {
+    const num1 = Math.floor(Math.random() * 100) + 1;
+    const num2 = Math.floor(Math.random() * 100) + 1;
+    var result = calculateGCD(num1, num2);
+
+    const answer = readlineSync.question(
+        `Question: ${num1} ${num2}\nYour answer: `,
+    );
+
+    if (Number(result) === Number(answer)) {
+        console.log("Correct!");
+        return true;
+    } else {
+        console.log(
+            `'${answer}' is wrong answer ;(. Correct answer was '${result}'.\nLet's try again, ${name}!`,
+        );
+        return false;
+    }
+}
 
 export const even = (name) => {
     console.log('Answer "yes" if the number is even, otherwise answer "no".');
@@ -69,6 +97,25 @@ export const calc = (name) => {
 
     while (i < 3) {
         const result = getCalcExpretion(name);
+
+        if (!result) {
+            break;
+        }
+
+        i += 1;
+    }
+    if (i === 3) {
+        console.log(`Congratulations, ${name}!`);
+    }
+};
+
+export const gcd = (name) => {
+    console.log('Find the greatest common divisor of given numbers.');
+
+    let i = 0;
+
+    while (i < 3) {
+        const result = getGcdExpretion(name);
 
         if (!result) {
             break;
