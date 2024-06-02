@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import askName from "../src/cli.js";
 import { prime } from "../src/games.js";
 

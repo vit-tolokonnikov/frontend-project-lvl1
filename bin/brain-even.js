@@ -1,4 +1,4 @@
-// import readlineSync from "readline-sync";
+#!/usr/bin/env node
 import askName from "../src/cli.js";
 import { even } from "../src/games.js";
 
