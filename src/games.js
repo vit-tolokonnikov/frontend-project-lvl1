@@ -41,6 +41,14 @@ const calculateGCD = (num1, num2) => {
     return num1;
 };
 
+const calculateProgression = (start, step, length) => {
+    const progression = [];
+    for (let i = 0; i < length; i++) {
+        progression.push(start + i * step);
+    }
+    return progression;
+}
+
 const getGcdExpretion = (name) => {
     const num1 = Math.floor(Math.random() * 100) + 1;
     const num2 = Math.floor(Math.random() * 100) + 1;
@@ -56,6 +64,32 @@ const getGcdExpretion = (name) => {
     } else {
         console.log(
             `'${answer}' is wrong answer ;(. Correct answer was '${result}'.\nLet's try again, ${name}!`,
+        );
+        return false;
+    }
+}
+
+const getProgression = (name) => {
+    const progressionLength = Math.floor(Math.random() * 6) + 5;
+    const start = Math.floor(Math.random() * 50) + 1;
+    const step = Math.floor(Math.random() * 10) + 1;
+    const progression = calculateProgression(start, step, progressionLength);
+    const hiddenIndex = Math.floor(Math.random() * progressionLength);
+    const hiddenNumber = progression[hiddenIndex];
+    progression[hiddenIndex] = '..';
+
+    const progressionString = progression.join(', ');
+
+    const answer = readlineSync.question(
+        `Question: ${progressionString}\nYour answer: `,
+    );
+
+    if (Number(hiddenNumber) === Number(answer)) {
+        console.log("Correct!");
+        return true;
+    } else {
+        console.log(
+            `'${answer}' is wrong answer ;(. Correct answer was '${hiddenNumber}'.\nLet's try again, ${name}!`,
         );
         return false;
     }
@@ -116,6 +150,24 @@ export const gcd = (name) => {
 
     while (i < 3) {
         const result = getGcdExpretion(name);
+
+        if (!result) {
+            break;
+        }
+
+        i += 1;
+    }
+    if (i === 3) {
+        console.log(`Congratulations, ${name}!`);
+    }
+};
+export const progression = (name) => {
+    console.log('What number is missing in the progression?');
+
+    let i = 0;
+
+    while (i < 3) {
+        const result = getProgression(name);
 
         if (!result) {
             break;
