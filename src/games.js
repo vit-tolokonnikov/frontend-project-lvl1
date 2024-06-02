@@ -95,6 +95,36 @@ const getProgression = (name) => {
     }
 }
 
+const isPrime = (num) => {
+    if (num < 2) return 'no';
+    if (num === 2) return 'yes';
+    if (num % 2 === 0) return 'no';
+    for (let i = 3; i * i <= num; i += 2) {
+        if (num % i === 0) return 'no';
+    }
+    return 'yes';
+}
+
+const getPrime = (name) => {
+    const num1 = Math.floor(Math.random() * 100) + 1;
+
+    var result = isPrime(num1);
+
+    const answer = readlineSync.question(
+        `Question: ${num1}\nYour answer: `,
+    );
+
+    if (String(result) === String(answer)) {
+        console.log("Correct!");
+        return true;
+    } else {
+        console.log(
+            `'${answer}' is wrong answer ;(. Correct answer was '${result}'.\nLet's try again, ${name}!`,
+        );
+        return false;
+    }
+};
+
 export const even = (name) => {
     console.log('Answer "yes" if the number is even, otherwise answer "no".');
 
@@ -168,6 +198,24 @@ export const progression = (name) => {
 
     while (i < 3) {
         const result = getProgression(name);
+
+        if (!result) {
+            break;
+        }
+
+        i += 1;
+    }
+    if (i === 3) {
+        console.log(`Congratulations, ${name}!`);
+    }
+};
+export const prime = (name) => {
+    console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
+
+    let i = 0;
+
+    while (i < 3) {
+        const result = getPrime(name);
 
         if (!result) {
             break;
